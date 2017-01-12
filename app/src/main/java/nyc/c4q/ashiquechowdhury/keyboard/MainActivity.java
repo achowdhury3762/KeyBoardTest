@@ -33,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
         new DownloadStringTask().execute();
     }
 
+    @Override
+    protected void onStop() {
+        super.onResume();
+        recreate();
+    }
+
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
         try {
@@ -68,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
             keyRecycler.setAdapter(new KeyAdapter(myKeys));
         }
 
